@@ -11,6 +11,9 @@ const { urlencoded } = require('body-parser');
 
 const PORT = process.env.PORT || 3000;
 
+const loginCont = require('./controllers/login-controller');
+
+
 app.use(express.static('./views/public'));
 app.use(cors());
 app.use(express.urlencoded({extended: true}));
@@ -24,6 +27,9 @@ app.use(session({
         maxAge: 1000000000
     }
 }))
+
+app.use('/login', loginCont);
+
 
 app.get('/', (req, res) => {
     res.render('home');
